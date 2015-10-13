@@ -1,7 +1,9 @@
 # ================================================================================================================
-# Ruby backup gem service docker image
+# A docker backup service.
 #
 # @see http://github.com/tenstartups/backup-service-docker
+# @see http://backup.github.io/backup/v4/
+# @see https://github.com/tenstartups/backup
 # ================================================================================================================
 
 # Base image
@@ -52,7 +54,7 @@ RUN \
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install ruby gems.
+# Install bakcup with ruby gems.
 RUN \
     cd /tmp \
     && git clone https://github.com/tenstartups/backup.git \
