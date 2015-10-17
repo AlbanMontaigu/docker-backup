@@ -77,5 +77,5 @@ VOLUME ["/home/backups", "/etc/backups", "/var/lib/backups", "/var/log/backups"]
 COPY ./backup/backup.sh /usr/local/bin/backup
 
 # Set the entrypoint script.
-ENTRYPOINT ["whenever"]
+ENTRYPOINT ["/usr/local/bundle/bin/whenever"]
 CMD ["--help"]
