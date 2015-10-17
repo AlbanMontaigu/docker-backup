@@ -9,6 +9,7 @@ Then you can run it with jenkins or cron daemon or anything you want.
 ## Usage
 
 Generate your configuration files :
+
 * my_backup.rb your backup configuration file
 * config.rb global configuration file
 
