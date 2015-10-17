@@ -62,11 +62,10 @@ RUN \
     && git checkout package_with_storage_id \
     && gem build backup.gemspec \
     && gem install backup --no-ri --no-rdoc \
-    && gem install whenever
+    && gem install whenever \
     && mkdir -p /home/backups/config \
     && cd /home/backups \
     && wheneverize
-    
 
 # Define working directory.
 WORKDIR /home/backups
