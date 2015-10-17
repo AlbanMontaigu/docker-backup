@@ -11,21 +11,15 @@ echo >&2 "[INFO] pwd : $(pwd)"
 echo >&2 "[INFO] ---------------------------------------------------------------"
 echo >&2 "[INFO] Checking if installation is requested"
 echo >&2 "[INFO] ---------------------------------------------------------------"
-if [ -f /home/backups/config/schedule.rb ]
+if [ -f /home/backups/Backup/config.rb ]
 then
     echo >&2 "[INFO] No installation requested"
 else
     echo >&2 "[INFO] Installation requested"
 
     # Generating whenever config file
-    echo >&2 "[INFO] Generating config/schedule.rb"
-    mkdir -p /home/backups/config \
-    && cd /home/backups \
-    && wheneverize
-
-    # Adding custom-schedule.rb
-    echo >&2 "[INFO] Adding config/custom-schedule.rb to config/schedule.rb"
-    cat /etc/backups/custom-schedule.rb >> config/schedule.rb
+    echo >&2 "[INFO] Generating /home/backups/Backup/config.rb"
+    backup generate:model --trigger $BACKUP_TRIGGER_ID --archives --storages='local' --compressor='gzip'
 
     echo >&2 "[INFO] Installation completed !"
 fi
