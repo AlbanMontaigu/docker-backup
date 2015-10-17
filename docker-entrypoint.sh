@@ -7,6 +7,12 @@ echo >&2 "[INFO] ---------------------------------------------------------------
 echo >&2 "[INFO] whoami : $(whoami)"
 echo >&2 "[INFO] pwd : $(pwd)"
 
+# Exit with error if BACKUP_TASK wasn't provided
+if [ -z "${BACKUP_TRIGGER_ID}" ]; then
+  echo "[ERROR] The backup task must be provided with the BACKUP_TRIGGER_ID environment variable"
+  exit 1
+fi
+
 # Backup the prev install in case of fail...
 echo >&2 "[INFO] ---------------------------------------------------------------"
 echo >&2 "[INFO] Checking if installation is requested"
