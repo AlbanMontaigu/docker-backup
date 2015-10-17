@@ -67,11 +67,8 @@ RUN \
 WORKDIR /home/backups
 
 # Define mountable directories.
-VOLUME ["/home/backups", "/var/log/backups"]
-
-# Entrypoint to enable live customization
-COPY docker-entrypoint.sh /docker-entrypoint.sh
+VOLUME ["/home/backups/Backup", "/var/log/backups"]
 
 # Set the entrypoint script.
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["backup"]
+ENTRYPOINT ["/usr/local/bundle/bin/backup"]
+CMD ["version"]
