@@ -73,5 +73,9 @@ VOLUME ["/home/backups", "/etc/backups", "/var/lib/backups", "/var/log/backups"]
 # Add files to the container.
 COPY ./backup/backup.sh /usr/local/bin/backup
 
+# Entrypoint to enable live customization
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
 # Set the entrypoint script.
-ENTRYPOINT ["/usr/local/bin/backup"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/local/bundle/bin/whenever"]
