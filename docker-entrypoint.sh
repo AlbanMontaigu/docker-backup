@@ -23,7 +23,7 @@ then
 
     # Adding custom-schedule.rb
     echo >&2 "[INFO] Adding config/custom-schedule.rb to config/schedule.rb"
-    cat custom-schedule.rb >> config/schedule.rb
+    cat /etc/backups/custom-schedule.rb >> config/schedule.rb
 
     echo >&2 "[INFO] Installation completed !"
 else
