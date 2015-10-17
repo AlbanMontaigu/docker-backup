@@ -13,6 +13,8 @@ echo >&2 "[INFO] Checking if installation is requested"
 echo >&2 "[INFO] ---------------------------------------------------------------"
 if [ -f /home/backups/config/schedule.rb ]
 then
+    echo >&2 "[INFO] No installation requested"
+else
     echo >&2 "[INFO] Installation requested"
 
     # Generating whenever config file
@@ -26,8 +28,6 @@ then
     cat /etc/backups/custom-schedule.rb >> config/schedule.rb
 
     echo >&2 "[INFO] Installation completed !"
-else
-    echo >&2 "[INFO] No installation requested"
 fi
 
 # Exec main command
