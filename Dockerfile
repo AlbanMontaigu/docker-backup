@@ -62,10 +62,7 @@ RUN \
     && git checkout package_with_storage_id \
     && gem build backup.gemspec \
     && gem install backup --no-ri --no-rdoc \
-    && gem install whenever \
-    && mkdir -p /home/backups/config \
-    && cd /home/backups \
-    && wheneverize
+    && gem install whenever
 
 # Define working directory.
 WORKDIR /home/backups
@@ -76,6 +73,9 @@ VOLUME ["/home/backups", "/etc/backups", "/var/lib/backups", "/var/log/backups"]
 # Add files to the container.
 COPY ./backup/backup.sh /usr/local/bin/backup
 
+# Entrypoint to enable live customization
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
 # Set the entrypoint script.
-ENTRYPOINT ["/usr/local/bundle/bin/whenever"]
-CMD ["--help"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/local/bundle/bin/whenever"]
