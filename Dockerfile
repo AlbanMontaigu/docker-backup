@@ -29,7 +29,7 @@ RUN apt-get update \
         mysql-client \
         nano \
         sqlite3 \
-        wget
+        wget \
 
 # Add postgresql client from official source.
 RUN \
@@ -54,14 +54,19 @@ RUN \
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install bakcup with ruby gems.
+# Install and configurre backup and whenever gems.
 RUN \
     cd /tmp \
     && git clone https://github.com/tenstartups/backup.git \
     && cd backup \
     && git checkout package_with_storage_id \
     && gem build backup.gemspec \
-    && gem install backup --no-ri --no-rdoc
+    && gem install backup --no-ri --no-rdoc \
+    && gem install whenever
+    && mkdir -p /home/backups/config \
+    && cd /home/backups \
+    && wheneverize
+    
 
 # Define working directory.
 WORKDIR /home/backups
@@ -70,8 +75,7 @@ WORKDIR /home/backups
 VOLUME ["/home/backups", "/etc/backups", "/var/lib/backups", "/var/log/backups"]
 
 # Add files to the container.
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./backup/backup.sh /usr/local/bin/backup
 
 # Set the entrypoint script.
-ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["whenever"]
