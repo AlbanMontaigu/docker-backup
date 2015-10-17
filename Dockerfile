@@ -29,7 +29,7 @@ RUN apt-get update \
         mysql-client \
         nano \
         sqlite3 \
-        wget \
+        wget
 
 # Add postgresql client from official source.
 RUN \
