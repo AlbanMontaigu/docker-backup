@@ -29,7 +29,7 @@ RUN apt-get update \
         mysql-client \
         nano \
         sqlite3 \
-        wget \
+        wget
 
 # Add postgresql client from official source.
 RUN \
@@ -61,21 +61,14 @@ RUN \
     && cd backup \
     && git checkout package_with_storage_id \
     && gem build backup.gemspec \
-    && gem install backup --no-ri --no-rdoc \
-    && gem install whenever
-    && mkdir -p /home/backups/config \
-    && cd /home/backups \
-    && wheneverize
-    
+    && gem install backup --no-ri --no-rdoc
 
 # Define working directory.
 WORKDIR /home/backups
 
 # Define mountable directories.
-VOLUME ["/home/backups", "/etc/backups", "/var/lib/backups", "/var/log/backups"]
-
-# Add files to the container.
-COPY ./backup/backup.sh /usr/local/bin/backup
+VOLUME ["/home/backups/Backup", "/var/log/backups"]
 
 # Set the entrypoint script.
-CMD ["whenever"]
+ENTRYPOINT ["/usr/local/bundle/bin/backup"]
+CMD ["version"]
