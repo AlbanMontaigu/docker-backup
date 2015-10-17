@@ -8,7 +8,7 @@ Then you can run it with jenkins or cron daemon or anything you want.
 
 ## Usage
 
-Generate your configuration files :
+**Generate your configuration files :**
 
 * my_backup.rb your backup configuration file
 * config.rb global configuration file
@@ -25,7 +25,7 @@ Generate your configuration files :
 /var/local/backup:/home/backups/Backup/models
 ```
 
-Finally run your backup :
+**Finally run your backup :**
 
 ```
 docker run --rm \
