@@ -59,7 +59,7 @@ RUN \
     cd /tmp \
     && git clone https://github.com/tenstartups/backup.git \
     && cd backup \
-    && git checkout package_with_storage_id \
+    && git checkout 3e23d9bb5df4633f3974dd22b138daeaaff4a0bf \
     && gem build backup.gemspec \
     && gem install backup --no-ri --no-rdoc
 
